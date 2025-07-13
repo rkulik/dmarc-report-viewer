@@ -1,0 +1,51 @@
+{
+  "name": "@rkulik/dmarc-report-viewer",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.14.0",
+  "description": "DMARC Report Viewer",
+  "author": "René Kulik <rene@kulik.io> (https://www.kulik.io/)",
+  "license": "MIT",
+  "homepage": "https://github.com/rkulik/dmarc-report-viewer#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rkulik/dmarc-report-viewer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rkulik/dmarc-report-viewer/issues"
+  },
+  "keywords": [
+    "dmarc",
+    "report",
+    "viewer",
+    "email",
+    "security"
+  ],
+  "main": "dist/index.js",
+  "bin": {
+    "dmarc-report-viewer": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup --dts",
+    "start": "node dist/index.js",
+    "lint": "eslint . -c eslint.config.js",
+    "test": "echo \"Error: no test specified\"",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@rkulik/eslint-config": "^1.6.0",
+    "@rkulik/prettier-config": "^1.1.0",
+    "eslint": "^9.31.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  },
+  "prettier": "@rkulik/prettier-config"
+}
