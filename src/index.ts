@@ -1,4 +1,5 @@
 #! /usr/bin/env node
+import { select } from '@inquirer/prompts';
 import * as unzipper from 'unzipper';
 import { Parser } from 'xml2js';
 import { stripPrefix } from 'xml2js/lib/processors.js';
@@ -11,6 +12,8 @@ import * as path from 'path';
 import * as zlib from 'zlib';
 
 type Report = z.infer<typeof ReportSchema>;
+
+const allowedExtensions = ['.xml', '.gz', '.zip'];
 
 const parser = new Parser({
   explicitArray: false,
@@ -73,19 +76,42 @@ const displayReport = (report: Report): void => {
   console.table(table);
 };
 
-const main = async (): Promise<void> => {
-  const filePath = process.argv[2];
-  if (!filePath) {
-    // eslint-disable-next-line no-console
-    console.error('Please provide a DMARC report file as an argument.');
-    return;
-  }
+const getSelectableFiles = (directory: string): string[] => {
+  return fs.readdirSync(directory).filter((file) => {
+    const fullPath = path.join(directory, file);
 
+    return fs.statSync(fullPath).isFile() && allowedExtensions.includes(path.extname(file).toLowerCase());
+  });
+};
+
+const selectFile = async (files: string[]): Promise<string> => {
+  const choices = files.map((file) => {
+    return { value: file };
+  });
+
+  return select({ message: 'Select a DMARC report file', choices, pageSize: 20 });
+};
+
+const main = async (): Promise<void> => {
   try {
-    const xml = await loadFile(filePath);
+    const currentDirectory = process.cwd();
+    const selectableFiles = getSelectableFiles(currentDirectory);
+    if (!selectableFiles.length) {
+      // eslint-disable-next-line no-console
+      console.error('No DMARC report files to select.');
+      return;
+    }
+
+    const filePath = await selectFile(selectableFiles);
+    const xml = await loadFile(path.join(currentDirectory, filePath));
     const parsedXml = await parseXml(xml);
     displayReport(parsedXml);
-  } catch {
+  } catch (error) {
+    const isErrorInstance = error instanceof Error;
+    if (isErrorInstance && error.name === 'ExitPromptError') {
+      return;
+    }
+
     // eslint-disable-next-line no-console
     console.error('Unable to view DMARC report.');
   }
