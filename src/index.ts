@@ -16,8 +16,8 @@ const main = async (): Promise<void> => {
 
     const filePath = await selectFile(selectableFiles);
     const xml = await loadFile(path.join(currentDirectory, filePath));
-    const parsedXml = await parseXml(xml);
-    displayReport(parsedXml);
+    const report = await parseXml(xml);
+    displayReport(report);
   } catch (error) {
     const isErrorInstance = error instanceof Error;
     if (isErrorInstance && error.name === 'ExitPromptError') {

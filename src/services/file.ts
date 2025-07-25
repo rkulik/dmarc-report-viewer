@@ -3,7 +3,7 @@ import { Parser } from 'xml2js';
 import { stripPrefix } from 'xml2js/lib/processors.js';
 import type z from 'zod';
 
-import type { Report as ReportSchema } from '../schema.js';
+import { Report as ReportSchema } from '../schema.js';
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -19,8 +19,10 @@ const getExtension = (filePath: string): string => {
   return path.extname(filePath).toLowerCase();
 };
 
-export const parseXml = (xml: string): Promise<Report> => {
-  return parser.parseStringPromise(xml);
+export const parseXml = async (xml: string): Promise<Report> => {
+  const parsedXml = (await parser.parseStringPromise(xml)) as unknown;
+
+  return ReportSchema.parse(parsedXml);
 };
 
 export const getSelectableFiles = (directory: string): string[] => {
