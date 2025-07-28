@@ -1,9 +1,8 @@
+import { Report as ReportSchema } from '@app/schema.js';
 import * as unzipper from 'unzipper';
 import { Parser } from 'xml2js';
 import { stripPrefix } from 'xml2js/lib/processors.js';
 import type z from 'zod';
-
-import { Report as ReportSchema } from '../schema.js';
 
 import * as fs from 'fs';
 import * as path from 'path';

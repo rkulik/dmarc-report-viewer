@@ -1,6 +1,5 @@
+import type { Report } from '@app/services/file.js';
 import { select } from '@inquirer/prompts';
-
-import type { Report } from './file.js';
 
 const statusMap: Record<string, { emoji: string; text: string }> = {
   none: { emoji: '✅', text: 'Delivered' },

@@ -4,6 +4,10 @@
     "module": "NodeNext",
     "moduleResolution": "nodenext",
     "baseUrl": ".",
+    "paths": {
+      "@app/*": ["./src/*"],
+      "@test/*": ["./test/*"]
+    },
     "outDir": "dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

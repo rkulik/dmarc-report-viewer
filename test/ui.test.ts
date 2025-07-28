@@ -1,7 +1,6 @@
+import { parseXml } from '@app/services/file.js';
+import { displayReport } from '@app/services/ui.js';
 import { describe, expect, it, jest } from '@jest/globals';
-
-import { parseXml } from '../src/services/file.js';
-import { displayReport } from '../src/services/ui.js';
 
 import * as fs from 'fs';
 import * as path from 'path';

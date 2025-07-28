@@ -1,6 +1,6 @@
 #! /usr/bin/env node
-import { getSelectableFiles, loadFile, parseXml } from './services/file.js';
-import { displayReport, selectFile } from './services/ui.js';
+import { getSelectableFiles, loadFile, parseXml } from '@app/services/file.js';
+import { displayReport, selectFile } from '@app/services/ui.js';
 
 import * as path from 'path';
 

@@ -1,6 +1,5 @@
+import { getSelectableFiles, loadFile, parseXml } from '@app/services/file.js';
 import { describe, expect, it } from '@jest/globals';
-
-import { getSelectableFiles, loadFile, parseXml } from '../src/services/file.js';
 
 import * as fs from 'fs';
 import * as path from 'path';
