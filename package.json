@@ -1,7 +1,7 @@
 {
   "name": "@rkulik/dmarc-report-viewer",
   "type": "module",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "packageManager": "pnpm@10.14.0",
   "description": "DMARC Report Viewer",
   "author": "René Kulik <rene@kulik.io> (https://www.kulik.io/)",
